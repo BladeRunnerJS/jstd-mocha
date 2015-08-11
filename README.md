@@ -1,6 +1,10 @@
 # jstd-mocha
 
-Run your JsTestDriver tests directly within Mocha. This project borrows source code from [karma-jstd](https://github.com/vojtajina/karma-jstd). There is, as yet, no support for `AsyncTestCase` or `ConditionalAsyncTestCase`.
+Run your JsTestDriver tests directly within Mocha.
+
+[![Build Status](https://travis-ci.org/BladeRunnerJS/jstd-mocha.png)](https://travis-ci.org/BladeRunnerJS/jstd-mocha)
+
+This project borrows source code from [karma-jstd](https://github.com/vojtajina/karma-jstd). There is, as yet, no support for `AsyncTestCase` or `ConditionalAsyncTestCase`.
 
 
 ## Usage
