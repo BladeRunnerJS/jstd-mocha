@@ -43,4 +43,4 @@ and then run the tests like this:
 mocha test jstd-register
 ```
 
-This second way of doing things is particularly useful if you are planning to run your Mocha tests in a browser using the [karma-mocha](https://github.com/karma-runner/karma-mocha) plug-in.
+This second way of doing things is particularly useful if you are planning to run your Mocha tests in a browser using the [karma-mocha](https://github.com/karma-runner/karma-mocha) plug-in. Take a look at this project's [`package.json`](https://github.com/BladeRunnerJS/jstd-mocha/blob/master/package.json) and [`karma.conf.js`](https://github.com/BladeRunnerJS/jstd-mocha/blob/master/karma.conf.js) for examples of this.
