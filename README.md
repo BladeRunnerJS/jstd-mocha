@@ -11,14 +11,13 @@ This project borrows source code from [karma-jstd](https://github.com/vojtajina/
 
 ```js
 require('jstd-mocha').installTo(global);
-var x;
 
 TestCase.prototype.setUp = function() {
-	x = true;
+	this.x = true;
 };
 
 TestCase.prototype.testThatXIsTrue = function() {
-	assertTrue('x should have been set to true in setUp()', x);
+	assertTrue('x should have been set to true in setUp()', this.x);
 };
 ```
 
