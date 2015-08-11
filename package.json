@@ -1,0 +1,52 @@
+{
+  "name": "jstd-mocha",
+  "version": "0.0.1",
+  "description": "Run JsTestDriver tests on Mocha.",
+  "main": "src/JsTestDriver.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run test:lint && npm run test:node && npm run test:browser && npm run test:saucelabs",
+    "test:lint": "eslint src test",
+    "test:node": "mocha test --delay",
+    "test:node:debug": "mocha test --delay -w",
+    "test:browser": "karma start",
+    "test:browser:debug": "karma start karma-debug.conf.js",
+    "test:saucelabs": "envcheck SAUCE_ACCESS_KEY && karma start karma-saucelabs.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BladeRunnerJS/jstd-mocha.git"
+  },
+  "keywords": [
+    "JsTestDriver",
+    "js-test-driver",
+    "Mocha",
+    "adapter",
+    "adaptor"
+  ],
+  "author": "Dominic Chambers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BladeRunnerJS/jstd-mocha/issues"
+  },
+  "homepage": "https://github.com/BladeRunnerJS/jstd-mocha#readme",
+  "dependencies": {
+    "asap": "^2.0.3",
+    "expectations": "^0.5.1"
+  },
+  "devDependencies": {
+    "core-js": "^1.0.1",
+    "env-check": "^0.0.1",
+    "eslint": "^0.24.1",
+    "karma": "^0.13.6",
+    "karma-browserify": "^4.2.1",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-cli": "^0.1.0",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.2.0",
+    "karma-sauce-launcher": "^0.2.14",
+    "mocha": "^2.2.5"
+  }
+}
