@@ -48,10 +48,14 @@ function TestCaseFactory() {
 	}
 }
 
-TestCaseFactory.prototype.create = function(name) {
+TestCaseFactory.prototype.create = function(name, prototype) {
 	var TestCase = function() {
 	};
 	TestCase.__name = name;
+	if(prototype) {
+		TestCase.prototype = prototype;
+	}
+
 	this.testCases.push(TestCase);
 
 	return TestCase;
