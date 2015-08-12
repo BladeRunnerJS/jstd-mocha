@@ -16,7 +16,7 @@ JsTestDriver.installTo = function(target) {
 };
 
 JsTestDriver.prototype.TestCase = function(name, proto, type) {
-	return TestCaseFactory.create(name, proto, type);
+	return TestCaseFactory.create(name, proto, type === ASYNC_TYPE);
 };
 
 /**

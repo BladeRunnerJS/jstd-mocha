@@ -2,10 +2,19 @@
 'use strict';
 
 var asap = require('asap');
+var Queue = require('./Queue');
 
 function doIt(methodName, testCaseAccessor) {
 	it(methodName, function() {
 		testCaseAccessor.testCase[methodName]();
+	});
+}
+
+function doAsyncIt(methodName, testCaseAccessor) {
+	it(methodName, function() {
+		var queue = new Queue();
+		testCaseAccessor.testCase[methodName](queue);
+		return queue.resolve();
 	});
 }
 
@@ -31,7 +40,12 @@ function doDescribe(TestCase) {
 
 		for(var methodName in TestCase.prototype) {
 			if(methodName.match(/^test/)) {
-				doIt(methodName, testCaseAccessor);
+				if(!TestCase.__async) {
+					doIt(methodName, testCaseAccessor);
+				}
+				else {
+					doAsyncIt(methodName, testCaseAccessor);
+				}
 			}
 		}
 	});
@@ -48,10 +62,11 @@ function TestCaseFactory() {
 	}
 }
 
-TestCaseFactory.prototype.create = function(name, prototype) {
+TestCaseFactory.prototype.create = function(name, prototype, async) {
 	var TestCase = function() {
 	};
 	TestCase.__name = name;
+	TestCase.__async = async;
 	if(prototype) {
 		TestCase.prototype = prototype;
 	}

@@ -5,7 +5,7 @@
 var expect = require('expectations');
 require('..').installTo(global);
 
-TestCase('JsTestDriver (third suite)', {
+TestCase('Inline Test Cases', {
 	testInlineTestsAreRun: function() {
 		expect(function() {
 			assert(false);

@@ -34,6 +34,7 @@
   "homepage": "https://github.com/BladeRunnerJS/jstd-mocha#readme",
   "dependencies": {
     "asap": "^2.0.3",
+    "bluebird": "^2.9.34",
     "expectations": "^0.5.1"
   },
   "devDependencies": {
