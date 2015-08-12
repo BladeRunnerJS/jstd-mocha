@@ -6,6 +6,8 @@ Run your JsTestDriver tests directly within Mocha. This project borrows source c
 
 ## Usage
 
+After installing with `npm install --save-dev jstd-mocha` you can run JsTestDriver tests like this:
+
 ```js
 require('jstd-mocha').installTo(global);
 
