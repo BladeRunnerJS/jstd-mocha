@@ -32,3 +32,19 @@ JsTestDriverTest.prototype.testThatSimpleAssertionsWork = function() {
 		assert(false);
 	}).toThrow(Error);
 };
+
+JsTestDriverTest.prototype.testThatAssertTrueWorks = function() {
+	assertTrue(true);
+
+	expect(function() {
+		assertTrue(false);
+	}).toThrow(Error);
+};
+
+JsTestDriverTest.prototype.testThatAssertFalseWorks = function() {
+	assertFalse(false);
+
+	expect(function() {
+		assertFalse(true);
+	}).toThrow(Error);
+};
