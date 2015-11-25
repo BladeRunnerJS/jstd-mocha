@@ -1,5 +1,5 @@
 /*eslint new-cap:0*/
-/*globals TestCase, assert*/
+/*globals TestCase, assert, assertTrue, assertFalse*/
 'use strict';
 
 var expect = require('expectations');
@@ -30,5 +30,21 @@ JsTestDriverTest.prototype.testThatSimpleAssertionsWork = function() {
 
 	expect(function() {
 		assert(false);
+	}).toThrow(Error);
+};
+
+JsTestDriverTest.prototype.testThatAssertTrueWorks = function() {
+	assertTrue(true);
+
+	expect(function() {
+		assertTrue(false);
+	}).toThrow(Error);
+};
+
+JsTestDriverTest.prototype.testThatAssertFalseWorks = function() {
+	assertFalse(false);
+
+	expect(function() {
+		assertFalse(true);
 	}).toThrow(Error);
 };

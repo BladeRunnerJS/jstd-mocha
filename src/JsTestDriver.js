@@ -9,14 +9,14 @@ function JsTestDriver() {
 }
 
 JsTestDriver.installTo = function(target) {
-	var jstd = new JsTestDriver();
-	for(var methodName in JsTestDriver.prototype) {
-		target[methodName] = jstd[methodName].bind(jstd);
-	}
+  var jstd = new JsTestDriver();
+  for(var methodName in JsTestDriver.prototype) {
+    target[methodName] = jstd[methodName].bind(jstd);
+  }
 };
 
 JsTestDriver.prototype.TestCase = function(name, proto, type) {
-	return TestCaseFactory.create(name, proto, type === ASYNC_TYPE);
+  return TestCaseFactory.create(name, proto, type === ASYNC_TYPE);
 };
 
 /**
@@ -46,7 +46,11 @@ JsTestDriver.prototype.assert = function (message, actual) {
 };
 
 JsTestDriver.prototype.assertTrue = function (message, actual) {
-	this.assert(message, actual);
+  if (arguments.length < 2) {
+    actual = message;
+  }
+
+  expect(actual).toBeTruthy();
 };
 
 JsTestDriver.prototype.fail = function (sMessage) {
