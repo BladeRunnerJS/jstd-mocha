@@ -1,5 +1,5 @@
 /*eslint new-cap:0*/
-/*globals TestCase, assert*/
+/*globals TestCase, assert, assertTrue, assertFalse*/
 'use strict';
 
 var expect = require('expectations');
