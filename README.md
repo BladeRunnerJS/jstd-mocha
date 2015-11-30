@@ -11,11 +11,13 @@ After installing with `npm install --save-dev jstd-mocha` you can run JsTestDriv
 ```js
 require('jstd-mocha').installTo(global);
 
-TestCase.prototype.setUp = function() {
+var MyTestCase = TestCase('JsTestDriver (first suite)');
+
+MyTestCase.prototype.setUp = function() {
 	this.x = true;
 };
 
-TestCase.prototype.testThatXIsTrue = function() {
+MyTestCase.prototype.testThatXIsTrue = function() {
 	assertTrue('x should have been set to true in setUp()', this.x);
 };
 ```
