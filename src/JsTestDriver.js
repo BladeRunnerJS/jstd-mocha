@@ -5,6 +5,20 @@ var TestCaseFactory = require('./TestCaseFactory');
 var expect = require('expectations');
 var ASYNC_TYPE = 'async';
 
+function appendMessage(message, expectation) {
+	try {
+		expectation();
+	}
+	catch(e) {
+		if(!message) {
+			throw e;
+		}
+		else {
+			throw new Error(message + ': ' + e.message);
+		}
+	}
+}
+
 function JsTestDriver() {
 }
 
@@ -40,17 +54,23 @@ JsTestDriver.prototype.ConditionalAsyncTestCase = function (name, condition, pro
 JsTestDriver.prototype.assert = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
-	expect(actual).toBeTruthy();
+	appendMessage(message, function() {
+		expect(actual).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertTrue = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
-	expect(actual).toBeTruthy();
+	appendMessage(message, function() {
+		expect(actual).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.fail = function (sMessage) {
@@ -60,137 +80,192 @@ JsTestDriver.prototype.fail = function (sMessage) {
 JsTestDriver.prototype.assertFalse = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
-	expect(actual).toBeFalsy();
+	appendMessage(message, function() {
+		expect(actual).toBeFalsy();
+	});
 };
 
 JsTestDriver.prototype.assertEquals = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
 		expected = message;
+		message = null;
 	}
 
-	expect(actual).toEqual(expected);
+	appendMessage(message, function() {
+		expect(actual).toEqual(expected);
+	});
 };
 
 JsTestDriver.prototype.assertNotEquals = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
 		expected = message;
+		message = null;
 	}
 
-	expect(actual).not.toEqual(expected);
+	appendMessage(message, function() {
+		expect(actual).not.toEqual(expected);
+	});
 };
 
 JsTestDriver.prototype.assertSame = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
 		expected = message;
+		message = null;
 	}
 
-	expect(actual).toBe(expected);
+	appendMessage(message, function() {
+		expect(actual).toBe(expected);
+	});
 };
 
 JsTestDriver.prototype.assertNotSame = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
 		expected = message;
+		message = null;
 	}
 
-	expect(actual).not.toBe(expected);
+	appendMessage(message, function() {
+		expect(actual).not.toBe(expected);
+	});
 };
 
 JsTestDriver.prototype.assertNull = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(actual).toBeNull();
+
+	appendMessage(message, function() {
+		expect(actual).toBeNull();
+	});
 };
 
 JsTestDriver.prototype.assertNotNull = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(actual).not.toBeNull();
+
+	appendMessage(message, function() {
+		expect(actual).not.toBeNull();
+	});
 };
 
 JsTestDriver.prototype.assertUndefined = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(actual).toBeUndefined();
+
+	appendMessage(message, function() {
+		expect(actual).toBeUndefined();
+	});
 };
 
 JsTestDriver.prototype.assertNotUndefined = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(actual).not.toBeUndefined();
+
+	appendMessage(message, function() {
+		expect(actual).not.toBeUndefined();
+	});
 };
 
 JsTestDriver.prototype.assertNaN = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(isNaN(actual)).toBeTruthy();
+
+	appendMessage(message, function() {
+		expect(isNaN(actual)).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertNotNaN = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
-	expect(isNaN(actual)).toBeFalsy();
+
+	appendMessage(message, function() {
+		expect(isNaN(actual)).toBeFalsy();
+	});
 };
+
 
 JsTestDriver.prototype.assertException = function (message, callback, error) {
 	if (arguments.length < 3) {
 		error = callback;
 		callback = message;
+		message = null;
 	}
+
 	error = typeof error === 'string' ? new Error(error) : error;
 
-	if (typeof error === undefined) {
-		expect(callback).toThrow();
-	} else {
-		expect(callback).toThrow(error);
-	}
+	appendMessage(message, function() {
+		if (typeof error === undefined) {
+			expect(callback).toThrow();
+		} else {
+			expect(callback).toThrow(error);
+		}
+	});
 };
 
 JsTestDriver.prototype.assertNoException = function (message, callback, error) {
 	if (arguments.length < 3) {
 		error = callback;
 		callback = message;
+		message = null;
 	}
+
 	error = typeof error === 'string' ? new Error(error) : error;
 
-	if (typeof error === undefined) {
-		expect(callback).not.toThrow();
-	} else {
-		expect(callback).not.toThrow(error);
-	}
+	appendMessage(message, function() {
+		if (typeof error === undefined) {
+			expect(callback).not.toThrow();
+		} else {
+			expect(callback).not.toThrow(error);
+		}
+	});
 };
 
 JsTestDriver.prototype.assertArray = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
-	expect(Array.isArray(actual)).toBeTruthy();
+	appendMessage(message, function() {
+		expect(Array.isArray(actual)).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertTypeOf = function (message, expected, type) {
 	if (arguments.length < 3) {
 		type = expected;
 		expected = message;
+		message = null;
 	}
 
-	expect(typeof type === expected).toBeTruthy();
+	appendMessage(message, function() {
+		expect(typeof type === expected).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertBoolean = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
 	this.assertTypeOf(message, 'boolean', actual);
@@ -199,6 +274,7 @@ JsTestDriver.prototype.assertBoolean = function (message, actual) {
 JsTestDriver.prototype.assertFunction = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
 	this.assertTypeOf(message, 'function', actual);
@@ -207,6 +283,7 @@ JsTestDriver.prototype.assertFunction = function (message, actual) {
 JsTestDriver.prototype.assertObject = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
 	this.assertTypeOf(message, 'object', actual);
@@ -215,6 +292,7 @@ JsTestDriver.prototype.assertObject = function (message, actual) {
 JsTestDriver.prototype.assertNumber = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
 	this.assertTypeOf(message, 'number', actual);
@@ -223,6 +301,7 @@ JsTestDriver.prototype.assertNumber = function (message, actual) {
 JsTestDriver.prototype.assertString = function (message, actual) {
 	if (arguments.length < 2) {
 		actual = message;
+		message = null;
 	}
 
 	this.assertTypeOf(message, 'string', actual);
@@ -232,63 +311,84 @@ JsTestDriver.prototype.assertMatch = function (message, regexp, actual) {
 	if (arguments.length < 3) {
 		actual = regexp;
 		regexp = message;
+		message = null;
 	}
 
-	expect(actual).toMatch(regexp);
+	appendMessage(message, function() {
+		expect(actual).toMatch(regexp);
+	});
 };
 
 JsTestDriver.prototype.assertNoMatch = function (message, regexp, actual) {
 	if (arguments.length < 3) {
 		actual = regexp;
 		regexp = message;
+		message = null;
 	}
 
-	expect(actual).not.toMatch(regexp);
+	appendMessage(message, function() {
+		expect(actual).not.toMatch(regexp);
+	});
 };
 
 JsTestDriver.prototype.assertTagName = function (message, tag, element) {
 	if (arguments.length < 3) {
 		element = tag;
 		tag = message;
+		message = null;
 	}
 
-	expect(element.nodeName.toLowerCase() === tag.toLowerCase()).toBeTruthy();
+	appendMessage(message, function() {
+		expect(element.nodeName.toLowerCase() === tag.toLowerCase()).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertClassName = function (message, className, element) {
 	if (arguments.length < 3) {
 		element = className;
 		className = message;
+		message = null;
 	}
 
-	expect(element.className.split(' ')).toContain(className);
+	appendMessage(message, function() {
+		expect(element.className.split(' ')).toContain(className);
+	});
 };
 
 JsTestDriver.prototype.assertElementId = function (message, id, element) {
 	if (arguments.length < 3) {
 		element = id;
 		id = message;
+		message = null;
 	}
 
-	expect(element.id).toEqual(id);
+	appendMessage(message, function() {
+		expect(element.id).toEqual(id);
+	});
 };
 
 JsTestDriver.prototype.assertInstanceOf = function (message, constructor, actual) {
 	if (arguments.length < 3) {
 		actual = constructor;
 		constructor = message;
+		message = null;
 	}
 
-	expect(actual instanceof constructor).toBeTruthy();
+	appendMessage(message, function() {
+		expect(actual instanceof constructor).toBeTruthy();
+	});
 };
 
 JsTestDriver.prototype.assertNotInstanceOf = function (message, constructor, actual) {
 	if (arguments.length < 3) {
 		actual = constructor;
 		constructor = message;
+		message = null;
 	}
 
-	expect(actual instanceof constructor).toBeFalsy();
+	appendMessage(message, function() {
+		expect(actual instanceof constructor).toBeFalsy();
+	});
 };
 
 module.exports = JsTestDriver;
