@@ -3,6 +3,7 @@
 
 var TestCaseFactory = require('./TestCaseFactory');
 var expect = require('expectations');
+var asserts = require('./asserts');
 var ASYNC_TYPE = 'async';
 
 function appendMessage(message, expectation) {
@@ -88,7 +89,7 @@ JsTestDriver.prototype.assertFalse = function (message, actual) {
 	});
 };
 
-JsTestDriver.prototype.assertEquals = function (message, expected, actual) {
+JsTestDriver.prototype.$assertEquals = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
 		expected = message;
@@ -98,6 +99,10 @@ JsTestDriver.prototype.assertEquals = function (message, expected, actual) {
 	appendMessage(message, function() {
 		expect(actual).toEqual(expected);
 	});
+};
+
+JsTestDriver.prototype.assertEquals = function (/*message, expected, actual*/) {
+	asserts.assertEquals.apply(null, arguments);
 };
 
 JsTestDriver.prototype.assertNotEquals = function (message, expected, actual) {

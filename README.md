@@ -45,3 +45,16 @@ mocha test jstd-register
 ```
 
 This second way of doing things is particularly useful if you are planning to run your Mocha tests in a browser using the [karma-mocha](https://github.com/karma-runner/karma-mocha) plug-in. Take a look at this project's [`package.json`](https://github.com/BladeRunnerJS/jstd-mocha/blob/master/package.json) and [`karma.conf.js`](https://github.com/BladeRunnerJS/jstd-mocha/blob/master/karma.conf.js) for examples of this.
+
+
+## Migrating to Mocha
+
+Since jstd-mocha is mostly just a thin wrapper around Mocha and [expectations](https://www.npmjs.com/package/expectations), it isn't too hard to permanently change your tests so they run directly in Mocha. Additionally, since Mocha has an identical API to Jasmine for everything but asynchronous tests, and since [expectations](https://www.npmjs.com/package/expectations) is a port of the Jasmine assertion API, tests should also be runnable in Jasmine too.
+
+There are some caveats however. The more complex assertions (e.g. `assertEquals()`) aren't completely compatible with their Jasmine counterparts (e.g. `.toEqual()`), so we instead map these through to the assertion library that ships with js-test-driver by default.
+
+However, you can migrate your tests over to using 100% Jasmine compatible expectations by using these assertions instead:
+
+  * `$assertEquals()` instead of `assertEquals()`.
+
+Once you've done this for all tests, the final conversion can be done completely mechanically.

@@ -8,13 +8,13 @@ describe('optional message parameter', function() {
 
   it('rethrows the error if no message is provided', function() {
     expect(function() {
-      test.assertEquals('a', 'b');
+      test.$assertEquals('a', 'b');
     }).toThrow('expected "b" to equal "a"');
   });
 
   it('appends the message to the error if a message is provided', function() {
     expect(function() {
-      test.assertEquals('msg', 'a', 'b');
+      test.$assertEquals('msg', 'a', 'b');
     }).toThrow('msg: expected "b" to equal "a"');
   });
 });

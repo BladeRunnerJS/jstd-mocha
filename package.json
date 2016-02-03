@@ -9,8 +9,8 @@
   "scripts": {
     "test": "npm run test:lint && npm run test:node && npm run test:browser && npm run test:saucelabs",
     "test:lint": "eslint src test",
-    "test:node": "mocha test --delay",
-    "test:node:debug": "mocha test --delay -w",
+    "test:node": "mocha jsdom test --delay",
+    "test:node:debug": "mocha jsdom test --delay -w",
     "test:browser": "karma start",
     "test:browser:debug": "karma start karma-debug.conf.js",
     "test:saucelabs": "envcheck SAUCE_ACCESS_KEY && karma start karma-saucelabs.conf.js"
@@ -41,6 +41,7 @@
     "core-js": "^1.0.1",
     "env-check": "^0.0.1",
     "eslint": "^0.24.1",
+    "jsdom": "^8.0.2",
     "karma": "^0.13.6",
     "karma-browserify": "^4.2.1",
     "karma-chrome-launcher": "^0.2.0",
