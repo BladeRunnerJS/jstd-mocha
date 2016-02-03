@@ -1,6 +1,6 @@
 {
   "name": "jstd-mocha",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Run JsTestDriver tests on Mocha.",
   "main": "src/JsTestDriver.js",
   "directories": {
