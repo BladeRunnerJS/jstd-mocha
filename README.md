@@ -55,6 +55,7 @@ There are some caveats however. The more complex assertions (e.g. `assertEquals(
 
 However, you can migrate your tests over to using 100% Jasmine compatible expectations by using these assertions instead:
 
-  * `$assertEquals()` instead of `assertEquals()`.
+  * `$assertEquals()` instead of `assertEquals()` (uses the same definition of object equality as `.toEqual()`).
+  * `$assertException()` instead of `assertException()` (if an argument is provided, expects that argument to be _equal_ to the error that will be thrown, rather than expecting a string containing only the type of the error that will be thrown).
 
 Once you've done this for all tests, the final conversion can be done completely mechanically.

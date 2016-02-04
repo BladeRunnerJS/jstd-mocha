@@ -208,7 +208,7 @@ JsTestDriver.prototype.assertNotNaN = function (message, actual) {
 };
 
 
-JsTestDriver.prototype.assertException = function (message, callback, error) {
+JsTestDriver.prototype.$assertException = function (message, callback, error) {
 	if (arguments.length < 3) {
 		error = callback;
 		callback = message;
@@ -224,6 +224,10 @@ JsTestDriver.prototype.assertException = function (message, callback, error) {
 			expect(callback).toThrow(error);
 		}
 	});
+};
+
+JsTestDriver.prototype.assertException = function (/*message, callback, error*/) {
+	asserts.assertException.apply(null, arguments);
 };
 
 JsTestDriver.prototype.assertNoException = function (message, callback, error) {

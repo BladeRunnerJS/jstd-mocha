@@ -655,3 +655,4 @@ var assert = assertTrue;
 
 // export assertions
 exports.assertEquals = assertEquals;
+exports.assertException = assertException;
