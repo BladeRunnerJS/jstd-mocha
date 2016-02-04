@@ -117,6 +117,9 @@ JsTestDriver.prototype.assertNotEquals = function (message, expected, actual) {
 	});
 };
 
+JsTestDriver.prototype.assertMapEquals = JsTestDriver.prototype.$assertEquals;
+JsTestDriver.prototype.assertArrayEquals = JsTestDriver.prototype.$assertEquals;
+
 JsTestDriver.prototype.assertSame = function (message, expected, actual) {
 	if (arguments.length < 3) {
 		actual = expected;
