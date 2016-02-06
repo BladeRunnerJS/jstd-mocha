@@ -4,6 +4,7 @@
 var TestCaseFactory = require('./TestCaseFactory');
 var expect = require('expectations');
 var asserts = require('./asserts');
+var AssertionError = require('./AssertionError');
 var ASYNC_TYPE = 'async';
 
 function appendMessage(message, expectation) {
@@ -74,7 +75,7 @@ JsTestDriver.prototype.assertTrue = function (message, actual) {
 };
 
 JsTestDriver.prototype.fail = function (sMessage) {
-	throw new Error(sMessage);
+	throw new AssertionError(sMessage);
 };
 
 JsTestDriver.prototype.assertFalse = function (message, actual) {
