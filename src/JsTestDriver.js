@@ -11,12 +11,11 @@ function appendMessage(message, expectation) {
 		expectation();
 	}
 	catch(e) {
-		if(!message) {
-			throw e;
+		if(message) {
+			e.message = message + ': ' + e.message;
 		}
-		else {
-			throw new Error(message + ': ' + e.message);
-		}
+
+		throw e;
 	}
 }
 
